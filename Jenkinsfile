@@ -51,8 +51,8 @@ pipeline {
     stage('Deploy') {
       steps {
         sh '''
-          sudo chown -R jenkins:jenkins /var/www/todoapp
-          cp -r . /var/www/todoapp/
+          sudo cp -r /var/lib/jenkins/workspace/todo-pipeline/. /var/www/todoapp/
+          sudo chown -R ubuntu:ubuntu /var/www/todoapp
           cd /var/www/todoapp
           npm ci --omit=dev
           sudo systemctl restart todoapp
@@ -61,7 +61,6 @@ pipeline {
         echo 'Deployment complete'
       }
     }
-  }
 
   post {
     always {
