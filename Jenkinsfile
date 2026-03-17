@@ -1,10 +1,8 @@
 pipeline {
   agent any
-
   tools {
     nodejs 'NodeJS-18'
   }
-
   stages {
     stage('Checkout') {
       steps {
@@ -12,42 +10,36 @@ pipeline {
         echo 'Code checked out successfully'
       }
     }
-
     stage('Install Dependencies') {
       steps {
         sh 'npm ci'
         echo 'Dependencies installed'
       }
     }
-
     stage('Lint') {
       steps {
         sh 'npm run lint'
         echo 'Linting passed'
       }
     }
-
     stage('Security Scan') {
       steps {
         sh 'npm audit --audit-level=high'
         echo 'Security scan passed'
       }
     }
-
     stage('Test') {
       steps {
         sh 'npm test'
         echo 'All tests passed'
       }
     }
-
     stage('Build') {
       steps {
         sh 'npm run build'
         echo 'Build complete'
       }
     }
-
     stage('Deploy') {
       steps {
         sh '''
@@ -61,7 +53,7 @@ pipeline {
         echo 'Deployment complete'
       }
     }
-
+  }
   post {
     always {
       echo 'Pipeline finished'
