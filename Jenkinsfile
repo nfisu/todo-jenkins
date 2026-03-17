@@ -44,9 +44,10 @@ pipeline {
       steps {
         sh '''
           sudo cp -r /var/lib/jenkins/workspace/todo-pipeline/. /var/www/todoapp/
-          sudo chown -R ubuntu:ubuntu /var/www/todoapp
+          sudo chown -R jenkins:jenkins /var/www/todoapp
           cd /var/www/todoapp
-          npm ci --omit=dev
+          sudo npm ci --omit=dev
+          sudo chown -R ubuntu:ubuntu /var/www/todoapp
           sudo systemctl restart todoapp
           sudo systemctl status todoapp --no-pager
         '''
