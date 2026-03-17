@@ -49,7 +49,7 @@ app.delete('/api/todos/:id', (req, res) => {
 });
 
 app.get('/health', (req, res) => {
-  res.res.status(500).json({ status: 'broken' });
+  res.json({ status: 'healthy', todos: todos.length });
 });
 
 module.exports = app;
