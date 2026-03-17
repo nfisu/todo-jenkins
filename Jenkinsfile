@@ -51,6 +51,7 @@ pipeline {
     stage('Deploy') {
       steps {
         sh '''
+          sudo chown -R jenkins:jenkins /var/www/todoapp
           cp -r . /var/www/todoapp/
           cd /var/www/todoapp
           npm ci --omit=dev
@@ -60,7 +61,6 @@ pipeline {
         echo 'Deployment complete'
       }
     }
-  }
 
   post {
     always {
